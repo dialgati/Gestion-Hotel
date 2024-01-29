@@ -27,7 +27,7 @@ function Inscription() {
          error.response.status >= 400 &&
          error.response.status <= 500
          ){
-          setError(error.reponse.data.message)
+          setError(error.response.data.message)
          }
     }
   }

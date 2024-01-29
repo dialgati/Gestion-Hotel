@@ -1,7 +1,7 @@
 import {useState} from "react";
 import axios from "axios";
 import logo from "../images/logo .png";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 function Connexion() {
    const [data, setData] = useState({
@@ -9,8 +9,10 @@ function Connexion() {
      password: ""
    });
    const [error, setError] = useState("");
+     const navigate = useNavigate();
+
    const handleChange = ({ currentTarget: input }) => {
-     setData({ ...data, [input.name]: input.value });
+     setData({...data, [input.name]:input.value });
    };
    const handleSubmit = async (e) => {
      e.preventDefault();
@@ -18,9 +20,10 @@ function Connexion() {
      try {
 // // Autres routes CRUD...
        const url = "http://localhost:8080/api/auth";
-       const { data: res } = await axios.post(url, data);
+       const {data: res} = await axios.post(url, data);
        localStorage.setItem("token", res.data);
-       window.location = "/admin/Dashboard"
+       window.location = "/"
+             navigate("/admin/Dashboard");
      } catch (error) {
        if (
          error.response &&
